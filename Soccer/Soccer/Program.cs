@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace SoccerTourney
 {
@@ -14,13 +15,14 @@ namespace SoccerTourney
             public string tName;
             public int wins;
             public int loss;
+            public int draw;
 
         };
 
         // This is an implementation of the Game class, representing the interaction of teams
         class Game
         {
-            Random rand = new Random();
+            public Random rand = new Random((int)DateTime.Now.Ticks);
             public int goalsFor;
             public int goalsAgainst;
             public int differential;
@@ -36,7 +38,6 @@ namespace SoccerTourney
         // This is a specific child-class of the Team base class
         class SoccerTeam : Team
         {
-            public int draw;
             public int points;
             public List<Game> matches;
 
@@ -104,21 +105,21 @@ namespace SoccerTourney
             for (int i = 1; i <= teamNumber; i++)
             {
                 String teamName = "";
-                int points = -1;
+                //int points = -1;
 
-                Console.Write("\n\nEnter Team " + i + "'s name: ");
+                Console.Write("\nEnter Team " + i + "'s name: ");
                 while (teamName.Equals(""))
                 {
                     teamName = convertString(Console.ReadLine());
                 }
 
-                Console.Write("\nEnter " + teamName + "'s points: ");
+                //Console.Write("\nEnter " + teamName + "'s points: ");
 
-                // When the points input is a convertable integer, then break the while loop and add the points to the team
-                while (points < 0)
-                {
-                    points = tryConvert(Console.ReadLine());
-                }
+                //// When the points input is a convertable integer, then break the while loop and add the points to the team
+                //while (points < 0)
+                //{
+                //    points = tryConvert(Console.ReadLine());
+                //}
 
                 SoccerTeam team = new SoccerTeam(teamName);
                 tourney.Add(team);
@@ -128,14 +129,15 @@ namespace SoccerTourney
 
             // MARK: Set points for all games in the tournament.
 
-            foreach (SoccerTeam team in tourney)
+            for (int y = 0; y < teamNumber-1; y++)
             {
-                for (int y = 0; y < teamNumber; y++)
+                foreach (SoccerTeam team in tourney)
                 {
                     Game temp = new Game();
+                    Thread.Sleep(5);
                     team.matches.Add(temp);
                     if (temp.differential > 0)
-                        team.points += 2;
+                        team.points += 3;
                     else if (temp.differential == 0)
                         team.points += 1;
                 }
@@ -143,11 +145,25 @@ namespace SoccerTourney
             }
 
 
+            // MARK: During tournament.
+
+            Console.Write("\n\nTournament in progress");
+            Thread.Sleep(200);
+            Console.Write(".");
+            Thread.Sleep(200);
+            Console.Write(".");
+            Thread.Sleep(200);
+            Console.Write(".");
+            Thread.Sleep(200);
+            Console.Write(".");
+            Thread.Sleep(200);
+            Console.Write(".");
+            Thread.Sleep(200);
 
 
             // MARK: Begin output of table.
 
-            Console.Write("\n\nHere is the sorted list:");
+            Console.Write("\n\n\nHere is the sorted list:");
 
             Console.Write("\n\n\nPosition\tName\t\t\tPoints");
             Console.Write("\n--------\t----\t\t\t------\n");
