@@ -18,25 +18,33 @@ namespace SoccerTourney
         };
 
         // This is an implementation of the Game class, representing the interaction of teams
-        class Match
+        class Game
         {
+            Random rand = new Random();
+            public int goalsFor;
+            public int goalsAgainst;
+            public int differential;
 
+            public Game()
+            {
+                goalsAgainst = rand.Next(0, 10);
+                goalsFor = rand.Next(0, 10);
+                differential = goalsFor - goalsAgainst;
+            }
         };
 
         // This is a specific child-class of the Team base class
         class SoccerTeam : Team
         {
             public int draw;
-            public int goalsFor;
-            public int goalsAgainst;
-            public int differential;
             public int points;
-            public List<Match> matches;
+            public List<Game> matches;
 
             public SoccerTeam(String name, int p)
             {
                 tName = name;
                 points = p;
+                matches = new List<Game>();
             }
         };
 
@@ -76,6 +84,9 @@ namespace SoccerTourney
 
             return origin.First().ToString().ToUpper() + origin.Substring(1).ToLower();
         }
+
+
+        // MARK: Main Function
 
         static void Main(string[] args)
         {
@@ -136,4 +147,3 @@ namespace SoccerTourney
         }
     }
 }
-
