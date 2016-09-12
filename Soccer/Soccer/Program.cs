@@ -8,7 +8,8 @@ namespace SoccerTourney
 {
     class Program
     {
-        class Team  // Basic Object of a team, could be of any type of sport. Only needs a Name, Wins, and Losses
+        // Basic Object of a team, could be of any type of sport. Only needs a Name, Wins, and Losses
+        class Team
         {
             public string tName;
             public int wins;
@@ -16,11 +17,13 @@ namespace SoccerTourney
 
         };
 
+        // This is an implementation of the Game class, representing the interaction of teams
         class Match
         {
 
         };
 
+        // This is a specific child-class of the Team base class
         class SoccerTeam : Team
         {
             public int draw;
@@ -37,7 +40,11 @@ namespace SoccerTourney
             }
         };
 
-
+        /**
+          * @desc tryConvert - attempts conversion of string to integer. If successful, returns converted int. If fail, returns -1
+          * @param string origin - input from user into the app, in the form of a string, hopefully an integer
+          * @return integer - converted string to integer value. If fail, return -1
+        */
         static int tryConvert(String origin)
         {
             int temp;
@@ -55,6 +62,11 @@ namespace SoccerTourney
 
         }
 
+        /**
+          * @desc convertString - takes any input string and converts it to 
+          * @param string origin - original string inputed by the user
+          * @return string - if the original string was blank, return blank string. Else, capitalize the first letter and lowercase the rest of the string.
+        */
         static String convertString(String origin)
         {
             if (origin.Equals(""))
@@ -89,7 +101,9 @@ namespace SoccerTourney
                 }
 
                 Console.Write("\nEnter " + teamName + "'s points: ");
-                while (points < 0)  // When the points input is a convertable integer, then break the while loop and add the points to the team
+
+                // When the points input is a convertable integer, then break the while loop and add the points to the team
+                while (points < 0)
                 {
                     points = tryConvert(Console.ReadLine());
                 }
@@ -99,6 +113,10 @@ namespace SoccerTourney
 
             }
 
+
+
+            // MARK: Begin output of table.
+
             Console.Write("\n\nHere is the sorted list:");
 
             Console.Write("\n\n\nPosition\tName\t\t\tPoints");
@@ -106,12 +124,14 @@ namespace SoccerTourney
 
             List<SoccerTeam> results = tourney.OrderByDescending(o => o.points).ToList();
 
+            // Populate the table of results
             foreach (SoccerTeam team in results)
             {
                 Console.WriteLine((results.IndexOf(team) + 1) + "\t\t" + team.tName + "\t\t\t" + team.points);
             }
 
-            Console.ReadLine();  // Pause the console before the app completes and closes
+            // Pause the console before the app completes and closes
+            Console.ReadLine();
 
         }
     }
