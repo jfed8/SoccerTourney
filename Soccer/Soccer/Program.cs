@@ -40,10 +40,11 @@ namespace SoccerTourney
             public int points;
             public List<Game> matches;
 
-            public SoccerTeam(String name, int p)
+
+            public SoccerTeam(String name)
             {
                 tName = name;
-                points = p;
+                points = 0;
                 matches = new List<Game>();
             }
         };
@@ -119,10 +120,28 @@ namespace SoccerTourney
                     points = tryConvert(Console.ReadLine());
                 }
 
-                SoccerTeam team = new SoccerTeam(teamName, points);
+                SoccerTeam team = new SoccerTeam(teamName);
                 tourney.Add(team);
 
             }
+
+
+            // MARK: Set points for all games in the tournament.
+
+            foreach (SoccerTeam team in tourney)
+            {
+                for (int y = 0; y < teamNumber; y++)
+                {
+                    Game temp = new Game();
+                    team.matches.Add(temp);
+                    if (temp.differential > 0)
+                        team.points += 2;
+                    else if (temp.differential == 0)
+                        team.points += 1;
+                }
+
+            }
+
 
 
 
