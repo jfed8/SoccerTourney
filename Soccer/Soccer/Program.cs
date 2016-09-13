@@ -92,6 +92,8 @@ namespace SoccerTourney
 
         static void Main(string[] args)
         {
+            
+            int PAD = 20;  // This represents the pad value for each entry in the table of results, it is here for easy changes.
             int teamNumber = -1;
             List<SoccerTeam> tourney = new List<SoccerTeam>();
 
@@ -105,7 +107,6 @@ namespace SoccerTourney
             for (int i = 1; i <= teamNumber; i++)
             {
                 String teamName = "";
-                //int points = -1;
 
                 Console.Write("\nEnter Team " + i + "'s name: ");
                 while (teamName.Equals(""))
@@ -163,17 +164,25 @@ namespace SoccerTourney
 
             // MARK: Begin output of table.
 
-            Console.Write("\n\n\nHere is the sorted list:");
-
-            Console.Write("\n\n\nPosition\tName\t\t\tPoints");
-            Console.Write("\n--------\t----\t\t\t------\n");
-
             List<SoccerTeam> results = tourney.OrderByDescending(o => o.points).ToList();
+
+            Console.Write("\n\n\nHere are the results:\n\n\n");
+
+            Console.Write("Position".PadRight(PAD, ' '));
+            Console.Write("Name".PadRight(PAD, ' '));
+            Console.Write("Points\n");
+            Console.Write("--------".PadRight(PAD, ' '));
+            Console.Write("----".PadRight(PAD, ' '));
+            Console.Write("------\n");
+
 
             // Populate the table of results
             foreach (SoccerTeam team in results)
             {
-                Console.WriteLine((results.IndexOf(team) + 1) + "\t\t" + team.tName + "\t\t\t" + team.points);
+                Console.Write((results.IndexOf(team) + 1).ToString().PadRight(PAD, ' '));
+                Console.Write(team.tName.ToString().PadRight(PAD, ' '));
+                Console.Write(team.points.ToString().PadRight(PAD, ' '));
+                Console.Write("\n");
             }
 
             // Pause the console before the app completes and closes
