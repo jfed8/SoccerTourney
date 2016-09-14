@@ -5,6 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
+/**
+ * 
+ * Program.cs
+ * SoccerTourney
+ * 
+ * IS403
+ * Section 2 Group 3
+ * 
+ * Created by Jaden Feddock on 9/12/16.
+ * Copyright © 2016 XLR8 Development LLC. All rights reserved.
+ * 
+ * 
+ **/
+
 namespace SoccerTourney
 {
     class Program
